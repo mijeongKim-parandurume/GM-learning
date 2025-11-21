@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>광명 푸드뱅크 AI 업무 혁신 강의안</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #ffffff;
+            color: #0f172a; /* Slate 900 */
+        }
+        .section-title {
+            font-size: 2.25rem; /* 36px */
+            line-height: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: #0f172a;
+            letter-spacing: -0.025em;
+        }
+        .card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+        }
+        .highlight-text {
+            color: #2563eb; /* Blue 600 */
+            font-weight: 700;
+        }
+        .prompt-box {
+            background-color: #f8fafc; /* Slate 50 */
+            border-left: 4px solid #2563eb;
+            padding: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-family: 'Pretendard', sans-serif; /* Monospace 느낌 제거하고 가독성 확보 */
+            font-size: 0.95rem;
+            color: #334155;
+            margin-top: 1rem;
+        }
+        .file-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            background-color: #eff6ff; /* Blue 50 */
+            color: #1e40af; /* Blue 800 */
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #dbeafe;
+        }
+        .step-number {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 2rem;
+            height: 2rem;
+            background-color: #0f172a;
+            color: white;
+            border-radius: 9999px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        /* 차트 컨테이너 */
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation (Sticky) -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="text-xl font-bold tracking-tighter text-slate-900">GWANGMYEONG <span class="text-blue-600">FOODBANK</span> AI</div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                    <a href="#intro" class="hover:text-blue-600 transition">도입 배경</a>
+                    <a href="#cases" class="hover:text-blue-600 transition">활용 사례</a>
+                    <a href="#practice-1" class="hover:text-blue-600 transition">실습 1: NotebookLM</a>
+                    <a href="#practice-2" class="hover:text-blue-600 transition">실습 2: AI Studio</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="intro" class="py-20 md:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-sm font-bold mb-6">2025년 AI 역량 강화 교육</span>
+        <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight mb-6 leading-tight">
+            업무는 <span class="text-blue-600">AI</span>에게,<br>마음은 <span class="text-blue-600">이웃</span>에게.
+        </h1>
+        <p class="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            반복되는 행정 업무와 문서 작업을 자동화하여<br>
+            지속가능한 복지 서비스와 현장 업무에 온전히 집중하는 시간.
+        </p>
+    </header>
+
+    <!-- Section 1: Why AI? (Chart & Intro) -->
+    <section class="py-16 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="section-title">왜 지금 <span class="highlight-text">AI 도입</span>인가?</h2>
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                        단순 반복 업무에 쏟는 시간을 줄이면, 복지 사각지대를 발굴하고 기부자와 소통하는 '진짜 업무'의 시간이 늘어납니다.
+                    </p>
+                    
+                    <!-- Key Metrics -->
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                            <div class="text-4xl font-bold text-blue-600 mb-2">80%</div>
+                            <div class="text-sm font-medium text-slate-500">문서 요약 시간 단축</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                            <div class="text-4xl font-bold text-blue-600 mb-2">10x</div>
+                            <div class="text-sm font-medium text-slate-500">데이터 처리 속도 향상</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chart Container -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
+                    <h3 class="text-lg font-bold text-slate-900 mb-6 text-center">업무 시간 배분 변화 예측</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Success Cases (Cards) -->
+    <section id="cases" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="section-title text-center">업무 유형별 <span class="highlight-text">성공 사례</span></h2>
+        <p class="text-center text-slate-500 mb-12 max-w-2xl mx-auto">
+            이미 많은 공공 및 비영리 조직에서 AI를 통해 업무 혁신을 경험하고 있습니다.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Case 1: Admin -->
+            <div class="card group">
+                <div class="text-4xl mb-4 group-hover:scale-110 transition duration-300">📑</div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">행정/공문 자동화</h3>
+                <p class="text-slate-600 text-sm mb-4">매일 쏟아지는 지자체 공문과 지침서를 일일이 읽지 않고 핵심만 파악합니다.</p>
+                <div class="border-t border-slate-100 pt-4 mt-auto">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Used Tool</span>
+                    <p class="text-sm font-medium text-slate-800 mt-1">NotebookLM (PDF 분석)</p>
+                </div>
+            </div>
+            
+            <!-- Case 2: Reporting -->
+            <div class="card group">
+                <div class="text-4xl mb-4 group-hover:scale-110 transition duration-300">📝</div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">보고서 작성 혁신</h3>
+                <p class="text-slate-600 text-sm mb-4">기존 양식에 맞춰 내용을 채우는 단순 반복 작업을 2일에서 1시간으로 단축했습니다.</p>
+                <div class="border-t border-slate-100 pt-4 mt-auto">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Used Tool</span>
+                    <p class="text-sm font-medium text-slate-800 mt-1">AI Studio (초안 생성)</p>
+                </div>
+            </div>
+            
+            <!-- Case 3: Data -->
+            <div class="card group">
+                <div class="text-4xl mb-4 group-hover:scale-110 transition duration-300">📊</div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">데이터 분석</h3>
+                <p class="text-slate-600 text-sm mb-4">흩어진 엑셀 파일과 수기 장부를 통합하여 기부/배분 추이를 한눈에 시각화합니다.</p>
+                <div class="border-t border-slate-100 pt-4 mt-auto">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Used Tool</span>
+                    <p class="text-sm font-medium text-slate-800 mt-1">Gemini / Advanced Data Analysis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice 1: NotebookLM -->
+    <section id="practice-1" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <span class="text-blue-600 font-bold tracking-wider text-sm uppercase">Practice 01</span>
+                <h2 class="section-title mt-2">NotebookLM: <span class="highlight-text">공문 지식 비서</span> 만들기</h2>
+                <p class="text-lg text-slate-600">수십 장의 공문을 다 읽지 마세요. AI에게 업로드하고 물어보면 됩니다.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-0">
+                    
+                    <!-- Scenario & Files (Left) -->
+                    <div class="md:col-span-4 bg-slate-100 p-8 border-r border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-900 mb-4">📂 실습 시나리오 및 파일</h3>
+                        <p class="text-sm text-slate-600 mb-6 leading-relaxed">
+                            2024년 동절기 지원 사업 지침이 내려왔습니다. 작년 지침과 무엇이 달라졌는지, 당장 무엇을 준비해야 하는지 파악해야 합니다.
+                        </p>
+                        
+                        <div class="space-y-2">
+                            <p class="text-xs font-bold text-slate-400 uppercase mb-2">Required Files</p>
+                            <div class="bg-white p-3 rounded border border-slate-200 flex items-center shadow-sm">
+                                <span class="text-red-500 mr-2">📄</span>
+                                <span class="text-sm font-medium text-slate-700">공문_2024_동절기지원.pdf</span>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-slate-200 flex items-center shadow-sm">
+                                <span class="text-red-500 mr-2">📄</span>
+                                <span class="text-sm font-medium text-slate-700">공문_2023_동절기지원(참고용).pdf</span>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-slate-200 flex items-center shadow-sm">
+                                <span class="text-blue-500 mr-2">📝</span>
+                                <span class="text-sm font-medium text-slate-700">내부_회의록_11월.txt</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step & Prompt (Right) -->
+                    <div class="md:col-span-8 p-8">
+                        <div class="space-y-8">
+                            <!-- Step 1 -->
+                            <div>
+                                <div class="flex items-center mb-2">
+                                    <span class="step-number mr-3">1</span>
+                                    <h4 class="text-xl font-bold text-slate-900">핵심 내용 3줄 요약</h4>
+                                </div>
+                                <div class="prompt-box">
+                                    "업로드된 '공문_2024_동절기지원.pdf'의 내용을 바탕으로, <span class="highlight-text">핵심 지원 대상, 필수 제출 서류, 마감 기한</span>을 포함하여 3줄로 요약해 줘."
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div>
+                                <div class="flex items-center mb-2">
+                                    <span class="step-number mr-3">2</span>
+                                    <h4 class="text-xl font-bold text-slate-900">변동 사항 비교 분석</h4>
+                                </div>
+                                <div class="prompt-box">
+                                    "작년 공문(2023)과 비교했을 때, <span class="highlight-text">올해 지원 금액이나 절차에서 달라진 점</span>이 무엇인지 표로 정리해서 보여줘."
+                                </div>
+                            </div>
+                            
+                            <!-- Step 3 -->
+                            <div>
+                                <div class="flex items-center mb-2">
+                                    <span class="step-number mr-3">3</span>
+                                    <h4 class="text-xl font-bold text-slate-900">담당자 할 일(To-Do) 추출</h4>
+                                </div>
+                                <div class="prompt-box">
+                                    "이 공문을 처리하기 위해 <span class="highlight-text">실무 담당자가 이번 주 내로 해야 할 일</span>을 우선순위대로 리스트업 해 줘."
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice 2: AI Studio -->
+    <section id="practice-2" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12 text-right md:text-left">
+            <span class="text-blue-600 font-bold tracking-wider text-sm uppercase">Practice 02</span>
+            <h2 class="section-title mt-2">AI Studio: <span class="highlight-text">보고서 자동 생성</span></h2>
+            <p class="text-lg text-slate-600">데이터만 넣으세요. 문장은 AI가 다듬고 완성합니다.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            <!-- Scenario -->
+            <div class="order-2 lg:order-1">
+                 <div class="bg-slate-50 p-8 rounded-2xl border border-slate-200 h-full">
+                    <h3 class="text-xl font-bold text-slate-900 mb-6">📋 실습 시나리오</h3>
+                    <p class="text-slate-600 mb-8 leading-relaxed">
+                        10월 한 달간의 기부 및 배분 실적이 담긴 텍스트 데이터가 있습니다. 이를 기관 공식 양식인 '월간 운영 보고서' 포맷에 맞춰 작성해야 합니다. 성과 분석 코멘트까지 AI가 작성하도록 합니다.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                            <strong class="block text-sm text-slate-900 mb-1">Input Data</strong>
+                            <div class="text-xs text-slate-500 font-mono bg-slate-50 p-2 rounded">
+                                10월_기부실적_Raw.txt<br>
+                                (기부: 120건, 쌀 500kg...)
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                            <strong class="block text-sm text-slate-900 mb-1">Template</strong>
+                            <div class="text-xs text-slate-500 font-mono bg-slate-50 p-2 rounded">
+                                월간보고서_양식.txt<br>
+                                (1.개요 2.성과 3.계획)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt Guide -->
+            <div class="order-1 lg:order-2 flex flex-col justify-center">
+                <div class="relative">
+                    <div class="absolute -left-4 top-0 bottom-0 w-1 bg-blue-200 rounded-full"></div>
+                    <div class="pl-8">
+                        <h4 class="text-2xl font-bold text-slate-900 mb-4">Prompt Engineering</h4>
+                        <p class="text-slate-600 mb-6">아래 내용을 AI Studio 프롬프트 창에 입력합니다.</p>
+                        
+                        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-lg relative">
+                            <span class="absolute top-4 right-4 text-xs font-bold text-blue-500 bg-blue-50 px-2 py-1 rounded">AI Studio Prompt</span>
+                            <p class="text-slate-800 font-medium leading-7">
+                                "너는 광명 푸드뱅크의 10년 차 행정 전문가야.<br>
+                                아래 제공된 <span class="bg-blue-100 text-blue-800 px-1 rounded">[10월 실적 데이터]</span>를 분석해서,<br>
+                                <span class="bg-blue-100 text-blue-800 px-1 rounded">[월간 보고서 양식]</span>에 맞춰 초안을 작성해 줘.<br><br>
+                                
+                                <span class="font-bold text-slate-900">작성 조건:</span><br>
+                                1. 수치는 정확하게 기입할 것.<br>
+                                2. '성과 분석' 항목에는 전월 대비 긍정적인 변화를 강조할 것.<br>
+                                3. 톤앤매너는 공적이고 전문적인 어조를 유지할 것."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-20 text-center mt-20">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">AI는 도구일 뿐, <br>핵심은 <span class="text-blue-400">당신의 따뜻한 마음</span>입니다.</h2>
+            <p class="text-slate-400 mb-12 text-lg">
+                우리가 아낀 시간만큼, 더 많은 이웃에게 따뜻한 밥상을 전할 수 있습니다.
+            </p>
+            <div class="border-t border-slate-800 pt-8 text-sm text-slate-500">
+                광명 푸드뱅크 AI 역량 강화 교육 자료 | 2025
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js Setup
+        const ctx = document.getElementById('comparisonChart').getContext('2d');
+        
+        Chart.defaults.font.family = "'Pretendard', sans-serif";
+        Chart.defaults.color = '#64748b';
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['기존 업무 방식', 'AI 도입 후'],
+                datasets: [
+                    {
+                        label: '단순 반복/행정 업무',
+                        data: [70, 20],
+                        backgroundColor: '#cbd5e1', // Slate 300
+                        borderRadius: 4,
+                        barPercentage: 0.6,
+                    },
+                    {
+                        label: '현장/기획 핵심 업무',
+                        data: [30, 80],
+                        backgroundColor: '#2563eb', // Blue 600
+                        borderRadius: 4,
+                        barPercentage: 0.6,
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                            font: { size: 12 }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#0f172a',
+                        padding: 12,
+                        cornerRadius: 8,
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { display: false },
+                        ticks: { callback: function(value) { return value + "%" } }
+                    },
+                    y: {
+                        stacked: true,
+                        grid: { display: false },
+                        ticks: { font: { weight: 'bold', size: 14 }, color: '#0f172a' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
